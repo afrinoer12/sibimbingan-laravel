@@ -1,125 +1,246 @@
-# SIBIMBINGAN - Sistem Bimbingan Skripsi Online
+<div align="center">
 
-SIBIMBINGAN adalah aplikasi web berbasis Laravel yang digunakan untuk mengelola proses bimbingan skripsi secara online. Sistem ini dirancang untuk memudahkan mahasiswa dalam mengajukan judul, mengunggah file bimbingan, melihat status revisi, serta memudahkan dosen dan admin dalam memantau proses bimbingan skripsi.
+# 🎓 SIBIMBINGAN
+
+### Sistem Bimbingan Skripsi Online Berbasis Laravel
+
+Aplikasi web modern untuk mengelola proses **pengajuan judul**, **penentuan dosen pembimbing**, **bimbingan skripsi**, **upload file**, **catatan revisi**, dan **laporan bimbingan** secara online.
+
+<br>
+
+![Laravel](https://img.shields.io/badge/Laravel-13-red?style=for-the-badge\&logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge\&logo=php\&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge\&logo=mysql\&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-UI-38B2AC?style=for-the-badge\&logo=tailwindcss\&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?style=for-the-badge\&logo=vite\&logoColor=white)
+
+</div>
 
 ---
 
-## Tentang Project
+## 📌 Tentang Project
 
-Project ini dibuat sebagai sistem informasi bimbingan skripsi online dengan fitur multi-role, yaitu:
+**SIBIMBINGAN** adalah sistem informasi bimbingan skripsi online yang dibuat untuk mempermudah proses akademik antara **mahasiswa**, **dosen pembimbing**, dan **admin**.
 
-* Admin
-* Mahasiswa
-* Dosen
-
-Setiap role memiliki dashboard dan fitur yang berbeda sesuai kebutuhan pengguna.
+Dengan sistem ini, mahasiswa dapat mengajukan judul skripsi, melakukan bimbingan, mengunggah file skripsi, dan melihat catatan revisi dari dosen. Dosen dapat memeriksa judul, memeriksa file, memberikan revisi, serta mengubah status bimbingan. Admin dapat mengatur data pengajuan, menentukan dosen pembimbing, dan melihat laporan bimbingan.
 
 ---
 
-## Fitur Utama
+## ✨ Fitur Unggulan
 
-### Admin
+| Fitur                        | Keterangan                                           |
+| ---------------------------- | ---------------------------------------------------- |
+| Multi Role Login             | Sistem memiliki role Admin, Mahasiswa, dan Dosen     |
+| Registrasi Mahasiswa & Dosen | Mahasiswa dan dosen dapat membuat akun sendiri       |
+| Pengajuan Judul Skripsi      | Mahasiswa dapat mengajukan judul secara online       |
+| Penentuan Dosen Pembimbing   | Admin dapat menentukan dosen pembimbing              |
+| Bimbingan Online             | Mahasiswa dapat mengajukan bimbingan dan upload file |
+| Catatan Revisi               | Dosen dapat memberikan revisi kepada mahasiswa       |
+| Status Progress              | Mahasiswa dapat melihat perkembangan bimbingan       |
+| Grafik Dashboard Dosen       | Dosen dapat melihat visualisasi status bimbingan     |
+| Laporan Bimbingan            | Admin dapat melihat dan mencetak laporan             |
+| Export PDF                   | Laporan dapat diexport dalam bentuk PDF              |
 
-* Login sebagai admin
-* Melihat dashboard statistik
-* Mengelola pengajuan judul mahasiswa
+---
+
+## 👥 Role dan Hak Akses
+
+### 👨‍💼 Admin
+
+Admin berperan sebagai pengelola utama sistem.
+
+* Melihat dashboard utama
+* Melihat statistik mahasiswa, dosen, pengajuan, dan bimbingan
+* Mengelola pengajuan judul
 * Menentukan dosen pembimbing
-* Melihat data bimbingan mahasiswa
 * Melihat laporan bimbingan
 * Export laporan bimbingan ke PDF
 
-### Mahasiswa
+### 🎓 Mahasiswa
+
+Mahasiswa berperan sebagai pengguna yang mengajukan dan menjalani proses bimbingan skripsi.
 
 * Registrasi akun mahasiswa
-* Login sebagai mahasiswa
+* Login ke dashboard mahasiswa
 * Mengajukan judul skripsi
 * Melihat status pengajuan judul
 * Melihat dosen pembimbing
 * Mengajukan bimbingan skripsi
-* Upload file proposal/BAB skripsi
-* Melihat catatan revisi dari dosen
+* Upload file proposal atau BAB skripsi
+* Melihat catatan revisi dosen
 * Melihat progress bimbingan
 
-### Dosen
+### 👨‍🏫 Dosen
+
+Dosen berperan sebagai pembimbing yang memeriksa pengajuan dan file mahasiswa.
 
 * Registrasi akun dosen
-* Login sebagai dosen
-* Melihat pengajuan judul mahasiswa bimbingan
-* Memberikan status judul: disetujui, revisi, atau ditolak
-* Melihat file bimbingan mahasiswa
+* Login ke dashboard dosen
+* Melihat pengajuan judul mahasiswa
+* Memberikan keputusan judul
+* Melihat file skripsi mahasiswa
 * Memberikan catatan revisi
 * Mengubah status bimbingan
 * Melihat grafik status bimbingan
 
 ---
 
-## Teknologi yang Digunakan
+## 🧭 Alur Sistem
 
-* Laravel 13
-* PHP 8.4
-* MySQL
-* Blade Template
-* Tailwind CSS
-* Laravel Breeze
-* DomPDF
-* Vite
-* Composer
-* NPM
-
----
-
-## Struktur Role Pengguna
-
-| Role      | Keterangan                                       |
-| --------- | ------------------------------------------------ |
-| Admin     | Mengelola seluruh data sistem                    |
-| Mahasiswa | Mengajukan judul dan bimbingan skripsi           |
-| Dosen     | Memeriksa pengajuan, file, dan memberikan revisi |
+```mermaid
+flowchart TD
+    A[Mahasiswa Registrasi/Login] --> B[Ajukan Judul Skripsi]
+    B --> C[Admin Menentukan Dosen Pembimbing]
+    C --> D[Dosen Memeriksa Judul]
+    D --> E{Keputusan Dosen}
+    E -->|Disetujui| F[Mahasiswa Ajukan Bimbingan]
+    E -->|Revisi| B
+    E -->|Ditolak| B
+    F --> G[Mahasiswa Upload File Skripsi]
+    G --> H[Dosen Memeriksa File]
+    H --> I[Dosen Memberikan Catatan Revisi]
+    I --> J{Status Bimbingan}
+    J -->|Revisi| F
+    J -->|Selesai/Disetujui| K[Admin Melihat Laporan]
+    K --> L[Export PDF]
+```
 
 ---
 
-## Alur Sistem
+## 🔄 Detail Alur Penggunaan
 
-### 1. Alur Mahasiswa
+### Alur Mahasiswa
 
-1. Mahasiswa melakukan registrasi akun.
+1. Mahasiswa membuat akun melalui halaman register.
 2. Mahasiswa login ke sistem.
 3. Mahasiswa mengajukan judul skripsi.
-4. Admin menentukan dosen pembimbing.
-5. Dosen memeriksa judul mahasiswa.
-6. Jika judul disetujui, mahasiswa dapat mengajukan bimbingan.
-7. Mahasiswa mengunggah file proposal atau BAB skripsi.
-8. Dosen memeriksa file.
-9. Dosen memberikan catatan revisi atau menyetujui bimbingan.
-10. Mahasiswa melihat status dan catatan revisi melalui dashboard.
+4. Mahasiswa menunggu admin menentukan dosen pembimbing.
+5. Setelah dosen ditentukan, pengajuan akan masuk ke dashboard dosen.
+6. Dosen memberikan keputusan terhadap judul.
+7. Jika judul disetujui, mahasiswa dapat mengajukan bimbingan.
+8. Mahasiswa mengunggah file skripsi.
+9. Dosen memberikan catatan revisi atau persetujuan.
+10. Mahasiswa melihat status bimbingan melalui dashboard.
 
-### 2. Alur Dosen
+### Alur Dosen
 
-1. Dosen melakukan registrasi akun.
+1. Dosen membuat akun melalui halaman register.
 2. Dosen login ke sistem.
-3. Dosen melihat dashboard bimbingan.
-4. Dosen melihat daftar pengajuan judul mahasiswa yang sudah ditentukan admin.
-5. Dosen memberikan keputusan pada judul mahasiswa.
-6. Dosen membuka file bimbingan mahasiswa.
+3. Dosen melihat daftar pengajuan judul mahasiswa.
+4. Dosen memberikan status judul.
+5. Dosen melihat data bimbingan mahasiswa.
+6. Dosen membuka file yang diupload mahasiswa.
 7. Dosen memberikan catatan revisi.
-8. Dosen mengubah status bimbingan menjadi menunggu, diproses, revisi, selesai, atau disetujui.
+8. Dosen mengubah status bimbingan.
 
-### 3. Alur Admin
+### Alur Admin
 
 1. Admin login ke sistem.
 2. Admin melihat dashboard utama.
-3. Admin melihat daftar pengajuan judul mahasiswa.
+3. Admin melihat daftar pengajuan judul.
 4. Admin menentukan dosen pembimbing.
-5. Admin memantau data bimbingan.
-6. Admin mencetak laporan bimbingan dalam bentuk PDF.
+5. Admin memantau proses bimbingan.
+6. Admin melihat laporan bimbingan.
+7. Admin mencetak laporan dalam bentuk PDF.
 
 ---
 
-## Cara Install Project
+## 📊 Status Bimbingan
 
-Ikuti langkah berikut agar project bisa dijalankan di komputer lain.
+| Status    | Keterangan                                  |
+| --------- | ------------------------------------------- |
+| Menunggu  | Bimbingan baru diajukan dan belum diperiksa |
+| Diproses  | File sedang diperiksa oleh dosen            |
+| Revisi    | Mahasiswa harus memperbaiki file            |
+| Selesai   | Tahapan bimbingan telah selesai             |
+| Disetujui | File atau bimbingan telah disetujui         |
 
-### 1. Clone Repository
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+| Teknologi      | Fungsi                         |
+| -------------- | ------------------------------ |
+| Laravel 13     | Framework utama backend        |
+| PHP 8.4        | Bahasa pemrograman server-side |
+| MySQL          | Database                       |
+| Laravel Breeze | Authentication                 |
+| Blade          | Template engine                |
+| Tailwind CSS   | Styling UI modern              |
+| Vite           | Frontend build tool            |
+| Composer       | Dependency manager PHP         |
+| NPM            | Dependency manager frontend    |
+| DomPDF         | Export laporan ke PDF          |
+
+---
+
+## 📂 Struktur Folder Penting
+
+```text
+sibimbingan-laravel
+├── app
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── Admin
+│   │   │   ├── Auth
+│   │   │   ├── Dosen
+│   │   │   └── Mahasiswa
+│   │   └── Middleware
+│   └── Models
+├── database
+│   ├── migrations
+│   └── seeders
+├── public
+│   └── images
+├── resources
+│   └── views
+│       ├── admin
+│       ├── auth
+│       ├── dosen
+│       ├── mahasiswa
+│       └── layouts
+├── routes
+│   └── web.php
+├── storage
+├── .env.example
+├── composer.json
+├── package.json
+└── README.md
+```
+
+---
+
+# 🚀 Cara Clone dan Menjalankan Project
+
+Bagian ini digunakan untuk teman yang ingin menjalankan project di laptop atau komputer masing-masing.
+
+---
+
+## 1. Software yang Harus Diinstall
+
+Pastikan sudah menginstall:
+
+* PHP
+* Composer
+* Node.js
+* NPM
+* MySQL
+* Laragon atau XAMPP
+* Git
+
+Cek dengan perintah:
+
+```bash
+php -v
+composer -V
+node -v
+npm -v
+git --version
+```
+
+---
+
+## 2. Clone Repository
 
 ```bash
 git clone https://github.com/afrinoer12/sibimbingan-laravel.git
@@ -131,9 +252,11 @@ Masuk ke folder project:
 cd sibimbingan-laravel
 ```
 
+> Jika nama repository berbeda, ganti URL repository sesuai link GitHub project.
+
 ---
 
-### 2. Install Dependency Laravel
+## 3. Install Dependency Laravel
 
 ```bash
 composer install
@@ -141,7 +264,7 @@ composer install
 
 ---
 
-### 3. Install Dependency Frontend
+## 4. Install Dependency Frontend
 
 ```bash
 npm install
@@ -149,13 +272,15 @@ npm install
 
 ---
 
-### 4. Copy File Environment
+## 5. Copy File Environment
+
+Untuk Windows CMD atau PowerShell:
 
 ```bash
 copy .env.example .env
 ```
 
-Untuk Git Bash atau Linux/Mac:
+Untuk Git Bash, Linux, atau Mac:
 
 ```bash
 cp .env.example .env
@@ -163,7 +288,7 @@ cp .env.example .env
 
 ---
 
-### 5. Generate App Key
+## 6. Generate Application Key
 
 ```bash
 php artisan key:generate
@@ -171,15 +296,15 @@ php artisan key:generate
 
 ---
 
-### 6. Buat Database
+## 7. Buat Database
 
-Buat database baru di phpMyAdmin dengan nama:
+Buka phpMyAdmin, lalu buat database baru:
 
 ```text
 db_bimbingan_skripsi
 ```
 
-Lalu sesuaikan konfigurasi database di file `.env`:
+Kemudian buka file `.env`, lalu sesuaikan konfigurasi database:
 
 ```env
 DB_CONNECTION=mysql
@@ -190,17 +315,21 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Jika MySQL menggunakan password, isi bagian `DB_PASSWORD`.
+Jika MySQL memakai password, isi bagian:
+
+```env
+DB_PASSWORD=password_mysql_kamu
+```
 
 ---
 
-### 7. Jalankan Migration
+## 8. Jalankan Migration
 
 ```bash
 php artisan migrate
 ```
 
-Jika ingin menghapus ulang database dan menjalankan migration dari awal:
+Jika ingin mengulang database dari awal:
 
 ```bash
 php artisan migrate:fresh
@@ -208,33 +337,27 @@ php artisan migrate:fresh
 
 ---
 
-### 8. Buat Storage Link
+## 9. Buat Storage Link
 
 ```bash
 php artisan storage:link
 ```
 
-Perintah ini diperlukan agar file skripsi yang diupload bisa dibuka melalui browser.
+Perintah ini diperlukan agar file skripsi yang diupload dapat dibuka melalui browser.
 
 ---
 
-### 9. Jalankan Vite
-
-Untuk mode development:
+## 10. Jalankan Vite
 
 ```bash
 npm run dev
 ```
 
-Atau untuk build production:
-
-```bash
-npm run build
-```
+Biarkan terminal ini tetap berjalan.
 
 ---
 
-### 10. Jalankan Server Laravel
+## 11. Jalankan Laravel Server
 
 Buka terminal baru, lalu jalankan:
 
@@ -250,92 +373,13 @@ http://127.0.0.1:8000
 
 ---
 
-## Cara Membuat Akun
+# ⚡ Perintah Cepat Setelah Clone
 
-### Mahasiswa
-
-1. Buka halaman register.
-2. Pilih role `Mahasiswa`.
-3. Isi nama, email, NIM, program studi, dan password.
-4. Klik daftar.
-5. Setelah berhasil, mahasiswa langsung masuk ke dashboard mahasiswa.
-
-### Dosen
-
-1. Buka halaman register.
-2. Pilih role `Dosen`.
-3. Isi nama, email, NIDN, bidang keahlian, dan password.
-4. Klik daftar.
-5. Setelah berhasil, dosen langsung masuk ke dashboard dosen.
-
-### Admin
-
-Admin tidak dibuat melalui halaman register. Akun admin dibuat secara manual melalui database atau seeder agar lebih aman.
-
-Contoh membuat admin melalui database:
-
-```sql
-INSERT INTO users (name, email, password, role, created_at, updated_at)
-VALUES (
-    'Admin',
-    'admin@gmail.com',
-    '$2y$12$GANTI_DENGAN_PASSWORD_HASH',
-    'admin',
-    NOW(),
-    NOW()
-);
-```
-
-Cara yang lebih mudah adalah membuat admin melalui Laravel Tinker.
+## Windows CMD / PowerShell
 
 ```bash
-php artisan tinker
-```
-
-Lalu jalankan:
-
-```php
-\App\Models\User::create([
-    'name' => 'Admin',
-    'email' => 'admin@gmail.com',
-    'password' => bcrypt('12345678'),
-    'role' => 'admin',
-]);
-```
-
-Login admin:
-
-```text
-Email    : admin@gmail.com
-Password : 12345678
-```
-
----
-
-## Alur Penggunaan untuk Teman
-
-Jika teman ingin menjalankan project ini, urutannya:
-
-1. Clone project dari GitHub.
-2. Jalankan `composer install`.
-3. Jalankan `npm install`.
-4. Copy `.env.example` menjadi `.env`.
-5. Buat database `db_bimbingan_skripsi`.
-6. Sesuaikan konfigurasi database di `.env`.
-7. Jalankan `php artisan key:generate`.
-8. Jalankan `php artisan migrate`.
-9. Jalankan `php artisan storage:link`.
-10. Jalankan `npm run dev`.
-11. Jalankan `php artisan serve`.
-12. Buka `http://127.0.0.1:8000`.
-13. Register sebagai mahasiswa atau dosen.
-14. Admin dibuat manual melalui Tinker.
-
----
-
-## Perintah Cepat Setelah Clone
-
-```bash
+git clone https://github.com/afrinoer12/sibimbingan-laravel.git
+cd sibimbingan-laravel
 composer install
 npm install
 copy .env.example .env
@@ -346,9 +390,11 @@ npm run dev
 php artisan serve
 ```
 
-Untuk Git Bash/Linux/Mac:
+## Git Bash / Linux / Mac
 
 ```bash
+git clone https://github.com/afrinoer12/sibimbingan-laravel.git
+cd sibimbingan-laravel
 composer install
 npm install
 cp .env.example .env
@@ -361,43 +407,121 @@ php artisan serve
 
 ---
 
-## Catatan Penting
+# 🔐 Akun Pengguna
 
-File `.env` tidak boleh diupload ke GitHub karena berisi konfigurasi database dan data sensitif.
+## Mahasiswa
 
-Folder berikut tidak perlu diupload ke GitHub:
+Mahasiswa dapat membuat akun sendiri melalui halaman:
 
 ```text
-/vendor
-/node_modules
-.env
+/register
 ```
 
-Pastikan file `.gitignore` sudah berisi:
+Pilih role:
 
-```gitignore
-/vendor
-/node_modules
-.env
-/public/storage
-/storage/*.key
+```text
+Mahasiswa
+```
+
+Data yang harus diisi:
+
+* Nama lengkap
+* Email
+* NIM
+* Program studi
+* Password
+
+---
+
+## Dosen
+
+Dosen dapat membuat akun sendiri melalui halaman:
+
+```text
+/register
+```
+
+Pilih role:
+
+```text
+Dosen
+```
+
+Data yang harus diisi:
+
+* Nama lengkap
+* Email
+* NIDN
+* Bidang keahlian
+* Password
+
+---
+
+## Admin
+
+Admin tidak dibuat melalui halaman register agar sistem lebih aman. Admin dibuat manual melalui Laravel Tinker.
+
+Jalankan:
+
+```bash
+php artisan tinker
+```
+
+Masukkan perintah berikut:
+
+```php
+\App\Models\User::create([
+    'name' => 'Admin',
+    'email' => 'admin@gmail.com',
+    'password' => bcrypt('12345678'),
+    'role' => 'admin',
+]);
+```
+
+Akun admin:
+
+```text
+Email    : admin@gmail.com
+Password : 12345678
 ```
 
 ---
 
-## Troubleshooting
+# 🧪 Troubleshooting
 
-### 1. Error `vendor/autoload.php not found`
+## Git Tidak Terbaca
 
-Jalankan:
+Jika muncul error:
+
+```text
+'git' is not recognized as an internal or external command
+```
+
+Artinya Git belum terinstall atau belum masuk PATH Windows.
+
+Solusi:
+
+1. Install Git.
+2. Saat instalasi pilih opsi **Git from the command line and also from 3rd-party software**.
+3. Tutup terminal.
+4. Buka terminal baru.
+5. Jalankan:
+
+```bash
+git --version
+```
+
+---
+
+## Error `vendor/autoload.php not found`
 
 ```bash
 composer install
 ```
 
-### 2. Error `Vite manifest not found`
+---
 
-Jalankan:
+## Error `Vite manifest not found`
 
 ```bash
 npm install
@@ -410,21 +534,27 @@ Atau:
 npm run build
 ```
 
-### 3. Error database tidak ditemukan
+---
 
-Pastikan database sudah dibuat di phpMyAdmin dan nama database di `.env` sudah benar.
+## Error Database Tidak Ditemukan
 
-### 4. File upload tidak bisa dibuka
+Pastikan database sudah dibuat di phpMyAdmin dan nama database di `.env` sudah benar:
 
-Jalankan:
+```env
+DB_DATABASE=db_bimbingan_skripsi
+```
+
+---
+
+## File Upload Tidak Bisa Dibuka
 
 ```bash
 php artisan storage:link
 ```
 
-### 5. Route tidak terbaca
+---
 
-Jalankan:
+## Route Tidak Terbaca
 
 ```bash
 php artisan optimize:clear
@@ -435,21 +565,103 @@ php artisan config:clear
 
 ---
 
-## Developer
+## Error `Unknown Column`
 
-Project ini dikembangkan oleh:
+Jalankan migration terbaru:
 
-```text
-Afrizal Noer
-Teknik Informatika
-Universitas Adzkia
+```bash
+php artisan migrate
+```
+
+Jika masih error, cek struktur tabel database melalui phpMyAdmin.
+
+---
+
+# 📤 Cara Push Project ke GitHub
+
+Setelah melakukan perubahan kode:
+
+```bash
+git add .
+git commit -m "Update project"
+git push
+```
+
+Jika push pertama kali:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit sistem bimbingan skripsi"
+git branch -M main
+git remote add origin https://github.com/afrinoer12/sibimbingan-laravel.git
+git push -u origin main
 ```
 
 ---
 
-## Lisensi
+# 📥 Cara Teman Mengambil Update Terbaru
 
-Project ini dibuat untuk kebutuhan pembelajaran dan pengembangan sistem informasi bimbingan skripsi online.
+Jika teman sudah pernah clone project, cukup jalankan:
 
+```bash
+git pull origin main
 ```
+
+Setelah pull, jalankan:
+
+```bash
+composer install
+npm install
+php artisan migrate
+php artisan optimize:clear
+npm run dev
 ```
+
+---
+
+# ⚠️ Catatan Penting
+
+File `.env` tidak boleh diupload ke GitHub karena berisi konfigurasi database dan informasi sensitif.
+
+Pastikan `.gitignore` berisi:
+
+```gitignore
+/vendor
+/node_modules
+.env
+/public/storage
+/storage/*.key
+```
+
+Folder berikut tidak perlu diupload ke GitHub:
+
+```text
+vendor
+node_modules
+.env
+```
+
+---
+
+# 🧑‍💻 Developer
+
+<div align="center">
+
+**Afrizal Noer**
+Teknik Informatika
+Universitas Adzkia
+
+</div>
+
+---
+
+# 📄 Lisensi
+
+Project ini dibuat untuk kebutuhan pembelajaran, pengembangan sistem informasi, dan implementasi sistem bimbingan skripsi online.
+
+<div align="center">
+
+### ⭐ Jangan lupa beri star repository ini jika bermanfaat.
+
+</div>
